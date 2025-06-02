@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CUTSCENE Plugin - Teste</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+  #closeBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 50, 50, 0.8);
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+  }
+
+  #videoContainer.fade-in {
+    animation: fadeIn 1s ease-in forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  </style>
+</head>
+<body>
+  <h1>🎬 CUTSCENE VIEWER</h1>
+
+  <input id="videoURL" placeholder="Cola aqui o link do vídeo (.mp4 público)" />
+  <br>
+  <button onclick="launchCutscene()">Lançar Cutscene</button>
+
+  <div id="videoContainer">
+    <video id="cutsceneVideo" controls autoplay></video>
+  </div>
+  <button id="closeBtn" onclick="closeCutscene()">❌</button>
+
+  <script>
+    function launchCutscene() {
+      const url = document.getElementById("videoURL").value;
+      const video = document.getElementById("cutsceneVideo");
+      const container = document.getElementById("videoContainer");
+
+      if (!url) {
+        alert("Insere um link de vídeo válido!");
+        return;
+      }
+
+      video.src = url;
+      container.style.display = "flex";
+      container.classList.add("fade-in");
+      document.getElementById("closeBtn").style.display = "block";
+      video.play();
+
+      // Tentar fullscreen automático
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      }
+
+      video.onended = closeCutscene;
+    }
+
+    function closeCutscene() {
+      const container = document.getElementById("videoContainer");
+      const video = document.getElementById("cutsceneVideo");
+      container.style.display = "none";
+      document.getElementById("closeBtn").style.display = "none";
+      video.pause();
+      video.src = "";
+      container.classList.remove("fade-in");
+    }
+  </script>
+</body>
+</html>

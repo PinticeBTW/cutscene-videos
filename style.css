@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: #000000;
+  color: white;
+  text-align: center;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 3em;
+  text-shadow: 0 0 20px rgb(255, 70, 70), 0 0 40px rgb(200, 0, 0);
+}
+
+input[type="text"] {
+  padding: 18px 36px;
+  width: 100%;
+  max-width: 900px;
+  border: 2px solid rgb(255, 70, 70);
+  border-radius: 10px;
+  background: #2a0000;
+  color: #ffecec;
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #888;
+  background: #330000;
+}
+
+button {
+  padding: 14px 36px;
+  font-size: 1.15em;
+  background: #ff4d4d;
+  color: #f1f1f1;
+  border: 1px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background: #ff1a1a;
+  border-color: #777;
+  transform: scale(1.03);
+}
+
+#videoContainer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: black;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+video {
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+#closeBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 50, 50, 0.9);
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10000;
+  display: none;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+#closeBtn:hover {
+  background: #ff0000;
+  transform: scale(1.15);
+}
+
+#videoContainer.fade-in {
+  animation: zoomFade 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomFade {
+  from { opacity: 0; transform: scale(1.1); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#customControls {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 10001;
+  backdrop-filter: blur(6px);
+}
+
+#customControls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+#customControls input[type=range] {
+  width: 200px;
+  height: 4px;
+  cursor: pointer;
+}
+
+#fullscreenBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.4em;
+  cursor: pointer;
+}
